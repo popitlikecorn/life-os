@@ -1,0 +1,143 @@
+
+# Life OS Task Configuration
+# Defines the various tasks and workflows in the system
+
+daily_planning:
+  name: "Daily Planning Session"
+  description: "Plan and prioritize tasks for the current day"
+  assigned_agent: "planning_agent"
+  frequency: "daily"
+  time: "08:00"
+  priority: "high"
+  inputs:
+    - calendar_events
+    - pending_tasks
+    - energy_levels
+    - goals_progress
+  outputs:
+    - daily_schedule
+    - prioritized_task_list
+    - time_blocks
+  success_criteria:
+    - tasks_completed_percentage: 80
+    - schedule_adherence: 75
+    - satisfaction_score: 4.0
+
+weekly_review:
+  name: "Weekly Progress Review"
+  description: "Analyze progress and adjust plans for the upcoming week"
+  assigned_agent: "planning_agent"
+  frequency: "weekly"
+  time: "sunday_18:00"
+  priority: "high"
+  inputs:
+    - week_completion_data
+    - goal_progress_metrics
+    - habit_tracking_data
+    - energy_patterns
+  outputs:
+    - progress_report
+    - next_week_plan
+    - goal_adjustments
+  success_criteria:
+    - review_completion: true
+    - plan_quality_score: 4.0
+
+habit_tracking:
+  name: "Habit Monitoring and Reinforcement"
+  description: "Track habits and provide reinforcement for consistency"
+  assigned_agent: "wellness_agent"
+  frequency: "continuous"
+  priority: "medium"
+  inputs:
+    - habit_check_ins
+    - behavior_patterns
+    - environmental_factors
+  outputs:
+    - habit_streaks
+    - reinforcement_messages
+    - adjustment_recommendations
+  success_criteria:
+    - consistency_rate: 85
+    - habit_strength_improvement: true
+
+learning_session:
+  name: "Skill Development Session"
+  description: "Facilitate focused learning and skill building"
+  assigned_agent: "learning_agent"
+  frequency: "daily"
+  duration: "60_minutes"
+  priority: "medium"
+  inputs:
+    - learning_goals
+    - current_skill_level
+    - available_time
+    - learning_preferences
+  outputs:
+    - learning_plan
+    - progress_assessment
+    - next_steps
+  success_criteria:
+    - session_completion: true
+    - comprehension_score: 75
+    - engagement_level: 4.0
+
+financial_check:
+  name: "Financial Health Assessment"
+  description: "Monitor financial metrics and provide recommendations"
+  assigned_agent: "financial_agent"
+  frequency: "weekly"
+  priority: "medium"
+  inputs:
+    - account_balances
+    - recent_transactions
+    - budget_categories
+    - financial_goals
+  outputs:
+    - financial_summary
+    - budget_variance_report
+    - recommendations
+  success_criteria:
+    - budget_adherence: 90
+    - savings_rate_target: true
+    - financial_goal_progress: true
+
+task_execution:
+  name: "Task Execution and Monitoring"
+  description: "Execute planned tasks and monitor progress"
+  assigned_agent: "execution_agent"
+  frequency: "continuous"
+  priority: "high"
+  inputs:
+    - task_queue
+    - current_context
+    - available_resources
+    - energy_levels
+  outputs:
+    - completed_tasks
+    - progress_updates
+    - blocking_issues
+  success_criteria:
+    - completion_rate: 85
+    - quality_score: 4.0
+    - time_efficiency: 90
+
+wellness_check:
+  name: "Wellness and Energy Assessment"
+  description: "Monitor physical and mental wellbeing indicators"
+  assigned_agent: "wellness_agent"
+  frequency: "3x_daily"
+  priority: "high"
+  inputs:
+    - energy_levels
+    - mood_indicators
+    - physical_metrics
+    - stress_levels
+  outputs:
+    - wellness_score
+    - energy_recommendations
+    - recovery_suggestions
+  success_criteria:
+    - wellness_trend: "improving"
+    - energy_optimization: true
+    - stress_management: "effective"
