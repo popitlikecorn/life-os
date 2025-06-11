@@ -22,9 +22,9 @@ from wings.social_wing import SocialWing
 from wings.political_wing import PoliticalWing
 from wings.psychological_wing import PsychologicalWing
 from wings.physiological_wing import PhysiologicalWing
-from wings.political_wing import PoliticalWing
-from wings.psychological_wing import PsychologicalWing
-from wings.physiological_wing import PhysiologicalWing
+
+# Import agent system
+from agents.agent_coordinator import AgentCoordinator
 
 class LifeOS:
     """
@@ -49,6 +49,10 @@ class LifeOS:
         self.psychological_wing = PsychologicalWing()
         self.physiological_wing = PhysiologicalWing()
         
+        # Initialize agent coordination system
+        self.agent_coordinator = AgentCoordinator()
+        self.agents = self.agent_coordinator.setup_default_agents()
+        
         # System state
         self.running = True
         self.current_worldview = {}
@@ -56,6 +60,7 @@ class LifeOS:
         self.strategic_position = {}
         
         print("✅ Life OS initialized successfully")
+        print("🤖 AI Agent network ready for custom instructions")
         
     def start_flywheel(self):
         """Start the main flywheel - set and forget operation"""
