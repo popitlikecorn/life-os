@@ -1,317 +1,317 @@
 
 """
-Intel Branch - Intelligence Gathering and Analysis
-Scouts for asymmetry, optionality, and strategic intelligence
+Intel Branch - Enhanced Intelligence Gathering and Analysis
+Frontier detection, asymmetric opportunity scouting, worldview updates
 """
 
 import json
 from datetime import datetime
 from typing import Dict, List, Any
+from ..core.frontier_detector import FrontierDetector
+from ..core.living_document import LivingDocument
 
 class IntelBranch:
     """
-    Intelligence Branch - The eyes and ears of Life OS
-    Continuously scans for opportunities, threats, and asymmetric bets
+    Enhanced Intelligence Branch - The eyes and ears of Life OS
+    Continuously scans frontiers, hunts asymmetric opportunities, updates worldview
     """
     
-    def __init__(self):
+    def __init__(self, document_manager=None):
         self.role = "Chief Intelligence Officer"
-        self.mission = "Hunt optionality. Detect fragility. Exploit asymmetry."
+        self.mission = "Hunt optionality. Detect fragility. Exploit asymmetry. Update worldview."
         
-        # Intel sources and methods
-        self.sources = [
-            "market_data",
-            "social_media", 
-            "news_feeds",
-            "network_intel",
-            "trend_analysis",
-            "competitive_intelligence"
+        # Core capabilities
+        self.frontier_detector = FrontierDetector()
+        self.document_manager = document_manager
+        
+        # Intelligence domains
+        self.domains = [
+            "asymmetric_opportunities",
+            "fragility_detection", 
+            "frontier_monitoring",
+            "worldview_updates",
+            "competitive_intelligence",
+            "black_swan_monitoring"
         ]
         
-        # Current worldview and game theory understanding
-        self.worldview = {
-            "market_regime": "uncertain",
-            "geopolitical_stability": "declining",
-            "tech_adoption_rate": "accelerating",
-            "social_cohesion": "fragmenting"
-        }
-        
-        # Intel database
-        self.intel_database = []
+        # Current intelligence state
+        self.current_worldview = {}
         self.opportunity_radar = []
         self.threat_monitor = []
+        self.intel_database = []
         
-    def conduct_sweep(self) -> Dict[str, Any]:
-        """Conduct comprehensive intelligence sweep"""
-        print("📊 Intel Branch: Conducting intelligence sweep...")
+    def daily_intel_briefing(self) -> Dict[str, Any]:
+        """Generate comprehensive daily intelligence briefing"""
+        print("📊 Intel Branch: Generating daily intelligence briefing...")
         
-        # Market intelligence
-        market_intel = self._scan_markets()
+        # Frontier detection
+        frontier_report = self.frontier_detector.daily_frontier_scan()
         
-        # Social intelligence  
-        social_intel = self._scan_social_landscape()
+        # Asymmetric opportunity hunting
+        asymmetric_opportunities = self._hunt_asymmetric_opportunities()
         
-        # Technology intelligence
-        tech_intel = self._scan_technology_trends()
+        # Fragility detection
+        fragility_warnings = self._detect_fragilities()
         
-        # Geopolitical intelligence
-        geo_intel = self._scan_geopolitical_landscape()
+        # Black Swan monitoring
+        black_swan_signals = self._monitor_black_swan_signals()
         
-        # Personal network intelligence
-        network_intel = self._scan_personal_network()
+        # Worldview updates needed
+        worldview_updates = self._assess_worldview_updates(frontier_report)
         
-        intel_report = {
+        intel_brief = {
+            "briefing_date": datetime.now().date().isoformat(),
             "timestamp": datetime.now().isoformat(),
-            "market": market_intel,
-            "social": social_intel,
-            "technology": tech_intel,
-            "geopolitical": geo_intel,
-            "network": network_intel,
-            "priority_alerts": self._generate_priority_alerts(),
-            "asymmetric_opportunities": self._identify_asymmetric_opportunities(),
-            "fragility_warnings": self._detect_fragilities()
+            "executive_summary": self._generate_executive_summary(),
+            "frontier_intelligence": frontier_report,
+            "asymmetric_opportunities": asymmetric_opportunities,
+            "fragility_warnings": fragility_warnings,
+            "black_swan_signals": black_swan_signals,
+            "worldview_updates": worldview_updates,
+            "priority_actions": self._prioritize_actions(),
+            "confidence_assessment": self._assess_confidence()
         }
         
         # Store in database
-        self.intel_database.append(intel_report)
+        self.intel_database.append(intel_brief)
         
-        print(f"✅ Intel sweep complete. {len(intel_report['priority_alerts'])} alerts generated.")
+        # Update worldview if significant changes
+        if worldview_updates:
+            self._update_worldview_documents(worldview_updates)
         
-        return intel_report
-    
-    def _scan_markets(self) -> Dict[str, Any]:
-        """Scan financial and business markets for opportunities"""
-        return {
-            "crypto_volatility": "high - opportunities for barbell strategy",
-            "ai_market": "explosive growth - skill arbitrage available",
-            "remote_work": "permanent shift - geographic arbitrage enabled",
-            "creator_economy": "emerging - network effects available"
-        }
-    
-    def _scan_social_landscape(self) -> Dict[str, Any]:
-        """Scan social dynamics and cultural shifts"""
-        return {
-            "trust_in_institutions": "declining - opportunities for alternatives",
-            "social_media_fatigue": "increasing - authentic connection premium",
-            "remote_relationships": "normalizing - new social protocols needed",
-            "community_building": "resurging - local networks gaining value"
-        }
-    
-    def _scan_technology_trends(self) -> Dict[str, Any]:
-        """Scan technology landscape for disruptions"""
-        return {
-            "ai_capabilities": "rapid advancement - skill obsolescence risk",
-            "automation_adoption": "accelerating - job displacement threats",
-            "blockchain_maturation": "selective adoption - infrastructure opportunities",
-            "biotech_breakthroughs": "emerging - longevity possibilities"
-        }
-    
-    def _scan_geopolitical_landscape(self) -> Dict[str, Any]:
-        """Scan geopolitical environment for macro changes"""
-        return {
-            "great_power_competition": "intensifying - supply chain risks",
-            "currency_wars": "emerging - dollar dominance challenged", 
-            "energy_transitions": "accelerating - new dependencies forming",
-            "migration_flows": "increasing - demographic shifts"
-        }
-    
-    def _scan_personal_network(self) -> Dict[str, Any]:
-        """Scan personal network for opportunities and intelligence"""
-        return {
-            "high_potential_connections": "3 new contacts this week",
-            "network_growth_rate": "expanding in AI/tech sectors",
-            "influence_opportunities": "content creation gaining traction",
-            "collaboration_potential": "2 promising partnership discussions"
-        }
-    
-    def _generate_priority_alerts(self) -> List[Dict[str, Any]]:
-        """Generate high-priority intelligence alerts"""
-        return [
+        print(f"✅ Daily intel briefing complete. {len(asymmetric_opportunities)} opportunities identified.")
+        
+        return intel_brief
+        
+    def _hunt_asymmetric_opportunities(self) -> List[Dict[str, Any]]:
+        """Hunt for classic Taleb-style asymmetric opportunities"""
+        opportunities = [
             {
-                "type": "asymmetric_opportunity",
-                "priority": "high",
-                "message": "AI skill arbitrage window closing - act within 6 months",
-                "action_required": "Accelerate AI capability development"
+                "opportunity_id": "ai_skill_arbitrage",
+                "type": "skill_arbitrage",
+                "description": "AI-human collaboration skills commanding massive premium",
+                "asymmetry_ratio": "15:1",
+                "upside": "10x productivity gains, premium positioning",
+                "downside": "Learning time investment (100-200 hours)",
+                "edge": "Most people avoiding due to complexity fear",
+                "hedge": "Skills remain valuable even if specific tools change",
+                "leverage": "Compound effect across all work domains",
+                "time_window": "6-18 months",
+                "confidence": 0.9,
+                "action_required": "Immediate skill development program"
             },
             {
-                "type": "fragility_warning", 
-                "priority": "medium",
-                "message": "Traditional employment stability declining",
-                "action_required": "Diversify income sources"
+                "opportunity_id": "geographic_arbitrage",
+                "type": "location_arbitrage", 
+                "description": "Remote work enabling cost/quality arbitrage",
+                "asymmetry_ratio": "5:1",
+                "upside": "50% cost reduction, quality of life improvement",
+                "downside": "Logistics complexity, social adjustment",
+                "edge": "Many still anchored to expensive locations",
+                "hedge": "Maintain flexibility to relocate",
+                "leverage": "Applies to all living expenses",
+                "time_window": "Immediate",
+                "confidence": 0.8,
+                "action_required": "Research target locations and test logistics"
             },
             {
-                "type": "network_opportunity",
-                "priority": "high", 
-                "message": "High-value network connection available",
-                "action_required": "Schedule introduction meeting"
+                "opportunity_id": "network_effect_content",
+                "type": "network_arbitrage",
+                "description": "Content creation with viral potential undervalued",
+                "asymmetry_ratio": "100:1",
+                "upside": "Massive audience, influence, monetization", 
+                "downside": "Time investment, potential failure",
+                "edge": "Most create without distribution strategy",
+                "hedge": "Build owned audience relationships",
+                "leverage": "Network effects compound exponentially",
+                "time_window": "12-36 months",
+                "confidence": 0.6,
+                "action_required": "Develop content strategy with distribution focus"
             }
         ]
-    
-    def _identify_asymmetric_opportunities(self) -> List[Dict[str, Any]]:
-        """Identify classic asymmetric risk/reward opportunities"""
-        return [
-            {
-                "opportunity": "AI-enhanced content creation",
-                "upside": "10x productivity improvement", 
-                "downside": "Learning time investment",
-                "asymmetry_ratio": "10:1",
-                "time_horizon": "3-6 months"
-            },
-            {
-                "opportunity": "Geographic arbitrage via remote work",
-                "upside": "50% cost reduction, quality improvement",
-                "downside": "Logistics complexity",
-                "asymmetry_ratio": "5:1", 
-                "time_horizon": "Immediate"
-            }
-        ]
-    
+        
+        return opportunities
+        
     def _detect_fragilities(self) -> List[Dict[str, Any]]:
         """Detect fragile systems that could break under stress"""
-        return [
+        fragilities = [
             {
-                "system": "single_income_dependency",
-                "fragility_type": "economic_shock_vulnerability",
-                "stress_test": "6-month income loss scenario",
-                "mitigation": "Build multiple income streams"
+                "fragility_id": "employment_automation",
+                "system": "traditional_employment_model",
+                "fragility_type": "technological_obsolescence",
+                "stress_factors": ["AI advancement", "automation adoption", "skill-job mismatch"],
+                "breaking_point": "50% of current jobs automatable within 10 years",
+                "impact_probability": 0.8,
+                "impact_severity": "severe",
+                "hedge_strategy": "Develop multiple income streams, focus on human-AI collaboration",
+                "monitoring_indicators": ["Automation adoption rates", "Job displacement news"],
+                "urgency": "high"
             },
             {
-                "system": "platform_dependence", 
-                "fragility_type": "algorithmic_risk",
-                "stress_test": "Platform policy change",
-                "mitigation": "Own direct audience relationships"
+                "fragility_id": "platform_dependence",
+                "system": "social_media_platforms",
+                "fragility_type": "regulatory_algorithmic_risk",
+                "stress_factors": ["Regulatory changes", "Algorithm updates", "Policy shifts"],
+                "breaking_point": "Sudden policy change or deplatforming",
+                "impact_probability": 0.6,
+                "impact_severity": "medium",
+                "hedge_strategy": "Build direct audience relationships, own distribution",
+                "monitoring_indicators": ["Platform policy changes", "Regulatory discussions"],
+                "urgency": "medium"
+            },
+            {
+                "fragility_id": "fiat_currency_system",
+                "system": "monetary_system",
+                "fragility_type": "confidence_based_system",
+                "stress_factors": ["Inflation", "Debt levels", "Geopolitical tensions"],
+                "breaking_point": "Loss of confidence in currency stability",
+                "impact_probability": 0.4,
+                "impact_severity": "severe",
+                "hedge_strategy": "Diversify across asset classes, maintain optionality",
+                "monitoring_indicators": ["Inflation rates", "Central bank policies", "Currency volatility"],
+                "urgency": "medium"
             }
         ]
-    
-    def emergency_assessment(self, threat_type: str) -> Dict[str, Any]:
-        """Conduct emergency threat assessment"""
-        print(f"🚨 Intel Branch: Emergency assessment for {threat_type}")
         
+        return fragilities
+        
+    def _monitor_black_swan_signals(self) -> List[Dict[str, Any]]:
+        """Monitor for early Black Swan event signals"""
+        signals = [
+            {
+                "signal_id": "ai_capability_jump",
+                "description": "Sudden breakthrough in AI capabilities",
+                "probability": "low",
+                "impact": "extreme",
+                "early_indicators": [
+                    "Research papers showing unexpected results",
+                    "Quiet corporate AI acquisitions",
+                    "Unusual compute resource allocation"
+                ],
+                "monitoring_sources": ["AI research papers", "Corporate filings", "Tech talent movement"],
+                "potential_impact": "Complete disruption of knowledge work",
+                "preparation": "Maintain AI skill development, build antifragile positioning"
+            },
+            {
+                "signal_id": "geopolitical_realignment", 
+                "description": "Major shift in global power structure",
+                "probability": "medium",
+                "impact": "high",
+                "early_indicators": [
+                    "Trade relationship changes",
+                    "Military alliance shifts", 
+                    "Currency adoption patterns"
+                ],
+                "monitoring_sources": ["Diplomatic news", "Trade data", "Military movements"],
+                "potential_impact": "Supply chain disruption, currency instability",
+                "preparation": "Geographic diversification, supply chain antifragility"
+            }
+        ]
+        
+        return signals
+        
+    def _assess_worldview_updates(self, frontier_report: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Assess if worldview documents need updates based on frontier intelligence"""
+        updates_needed = []
+        
+        significant_changes = frontier_report.get("significant_changes", [])
+        
+        for change in significant_changes:
+            if change.get("significance", 0) > 0.8:
+                updates_needed.append({
+                    "document": "worldview",
+                    "section": "current_understanding",
+                    "update_type": "evolution",
+                    "new_insight": change["description"],
+                    "reasoning": f"Significant frontier change with {change['significance']} significance",
+                    "source": "frontier_detection"
+                })
+                
+        return updates_needed
+        
+    def _update_worldview_documents(self, updates: List[Dict[str, Any]]):
+        """Update worldview documents with new intelligence"""
+        if not self.document_manager:
+            return
+            
+        for update in updates:
+            doc = self.document_manager.get_document(update["document"])
+            if doc:
+                doc.evolve(
+                    new_insight=update["new_insight"],
+                    source=update["source"],
+                    reasoning=update["reasoning"]
+                )
+                self.document_manager.update_document(
+                    update["document"],
+                    doc.content,
+                    f"Intel update: {update['new_insight'][:50]}..."
+                )
+                print(f"📝 Updated {update['document']} with new intelligence")
+                
+    def _generate_executive_summary(self) -> str:
+        """Generate executive summary of current intelligence state"""
+        return """
+        EXECUTIVE INTELLIGENCE SUMMARY:
+        
+        THREAT LEVEL: AMBER - Multiple systemic risks accelerating
+        OPPORTUNITY LEVEL: HIGH - Major asymmetric opportunities available
+        WORLDVIEW STATUS: STABLE - Minor updates required
+        
+        KEY DEVELOPMENTS:
+        - AI advancement creating unprecedented skill arbitrage
+        - Traditional employment model showing increased fragility
+        - Geographic arbitrage opportunities expanding
+        
+        IMMEDIATE ACTIONS REQUIRED:
+        - Accelerate AI skill development
+        - Diversify income sources
+        - Build antifragile positioning
+        """
+        
+    def _prioritize_actions(self) -> List[Dict[str, Any]]:
+        """Prioritize actions based on asymmetry and urgency"""
+        return [
+            {
+                "priority": 1,
+                "action": "Begin AI skill development program",
+                "rationale": "Highest asymmetry opportunity with closing window",
+                "timeline": "Immediate - 60 days",
+                "resources_required": "Time, learning materials"
+            },
+            {
+                "priority": 2,
+                "action": "Research geographic arbitrage options",
+                "rationale": "High asymmetry, low downside",
+                "timeline": "30 days research, 90 days execution",
+                "resources_required": "Research time, logistics planning"
+            },
+            {
+                "priority": 3,
+                "action": "Build direct audience relationships",
+                "rationale": "Hedge against platform fragility",
+                "timeline": "6-12 months",
+                "resources_required": "Content creation time, distribution strategy"
+            }
+        ]
+        
+    def _assess_confidence(self) -> Dict[str, float]:
+        """Assess confidence levels in intelligence assessments"""
         return {
-            "threat_analysis": f"Analyzing {threat_type} impact vectors",
-            "severity": "high",
-            "time_to_impact": "immediate",
-            "recommended_response": "Activate contingency protocols"
+            "frontier_detection": 0.8,
+            "asymmetric_opportunities": 0.9,
+            "fragility_analysis": 0.85,
+            "black_swan_monitoring": 0.6,
+            "overall_assessment": 0.8
         }
-    
-    def receive_feedback(self, execution_report: Dict[str, Any]):
-        """Receive feedback from execution to improve intelligence"""
-        print("📝 Intel Branch: Processing execution feedback...")
         
-        # Update worldview based on execution results
-        # This is where the system learns and improves
-        pass
-    
     def get_status(self) -> Dict[str, Any]:
         """Get current intel branch status"""
         return {
-            "active_sources": len(self.sources),
-            "intel_reports_generated": len(self.intel_database),
+            "briefings_generated": len(self.intel_database),
             "opportunities_tracked": len(self.opportunity_radar),
             "threats_monitored": len(self.threat_monitor),
-            "last_sweep": "30 minutes ago" if self.intel_database else "Never"
+            "last_briefing": "Today" if self.intel_database else "Never",
+            "worldview_current": bool(self.current_worldview),
+            "confidence_level": 0.8
         }
-"""
-Intel Branch - Intelligence gathering and analysis
-Part of the macro flywheel: Intel → Direction → Execution → Compound
-"""
-
-from typing import Dict, Any, List
-from datetime import datetime
-
-class IntelBranch:
-    """
-    Intelligence Branch - Gathers and processes environmental intelligence
-    Feeds the directional and executive branches
-    """
-    
-    def __init__(self):
-        self.role = "Intelligence Gathering & Analysis"
-        self.mission = "Provide actionable intelligence for strategic decision making"
-        self.intel_domains = [
-            "financial_markets",
-            "technology_trends", 
-            "geopolitical_developments",
-            "business_opportunities",
-            "social_dynamics",
-            "competitive_landscape"
-        ]
-        self.current_intel = {}
-        self.threat_level = "green"
-        
-    def daily_intel_briefing(self) -> Dict[str, Any]:
-        """Generate daily intelligence briefing"""
-        briefing = {
-            "date": datetime.now().date().isoformat(),
-            "threat_level": self.threat_level,
-            "key_developments": self._scan_developments(),
-            "opportunities": self._identify_opportunities(),
-            "threats": self._assess_threats(),
-            "asymmetric_bets": self._find_asymmetric_bets(),
-            "recommendations": self._generate_recommendations()
-        }
-        
-        self.current_intel = briefing
-        return briefing
-        
-    def _scan_developments(self) -> List[Dict[str, Any]]:
-        """Scan for key developments across domains"""
-        return [
-            {
-                "domain": "technology",
-                "development": "AI model capabilities expanding rapidly",
-                "impact": "high",
-                "timeframe": "immediate"
-            },
-            {
-                "domain": "geopolitics", 
-                "development": "Trade relationships shifting",
-                "impact": "medium",
-                "timeframe": "6-12 months"
-            }
-        ]
-        
-    def _identify_opportunities(self) -> List[Dict[str, Any]]:
-        """Identify emerging opportunities"""
-        return [
-            {
-                "type": "skill_arbitrage",
-                "description": "AI-human collaboration premium",
-                "asymmetry": "10:1 upside potential",
-                "action": "Develop AI workflow expertise"
-            }
-        ]
-        
-    def _assess_threats(self) -> List[Dict[str, Any]]:
-        """Assess potential threats and fragilities"""
-        return [
-            {
-                "threat": "Traditional employment automation",
-                "probability": "high",
-                "impact": "severe",
-                "hedge": "Multiple income streams"
-            }
-        ]
-        
-    def _find_asymmetric_bets(self) -> List[Dict[str, Any]]:
-        """Find Taleb-style asymmetric bets"""
-        return [
-            {
-                "bet": "Learn negotiation skills",
-                "downside": "100 hours time investment",
-                "upside": "10x deal-making improvement",
-                "edge": "Most people avoid difficult conversations"
-            }
-        ]
-        
-    def _generate_recommendations(self) -> List[str]:
-        """Generate actionable recommendations"""
-        return [
-            "Accelerate AI skill development",
-            "Build redundant income sources", 
-            "Strengthen network relationships"
-        ]
-        
-    def get_current_intel(self) -> Dict[str, Any]:
-        """Get current intelligence state"""
-        return self.current_intel
