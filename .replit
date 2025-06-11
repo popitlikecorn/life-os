@@ -26,3 +26,12 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd life_os && python main.py"
+
+[[workflows.workflow]]
+name = "Test Life OS"
+author = 43714996
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd life_os && python main.py"

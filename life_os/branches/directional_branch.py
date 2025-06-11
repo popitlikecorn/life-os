@@ -291,3 +291,143 @@ class DirectionalBranch:
             "contingency_plans": len(self.contingency_plans),
             "last_strategy_update": "2 hours ago" if self.strategic_plans else "Never"
         }
+"""
+Directional Branch - Strategic direction and game-theoretic planning
+Part of the macro flywheel: Intel → Direction → Execution → Compound
+"""
+
+from typing import Dict, Any, List
+
+class DirectionalBranch:
+    """
+    Directional Branch - Sets strategic direction based on intel
+    Game-theoretic planning and decision optimization
+    """
+    
+    def __init__(self):
+        self.role = "Strategic Direction & Game Theory"
+        self.mission = "Set optimal strategic direction based on intelligence"
+        self.current_strategy = {}
+        self.game_state = {}
+        
+    def set_strategic_direction(self, intel_brief: Dict[str, Any]) -> Dict[str, Any]:
+        """Set strategic direction based on intelligence briefing"""
+        
+        direction = {
+            "strategic_focus": self._determine_focus(intel_brief),
+            "resource_allocation": self._optimize_resources(intel_brief),
+            "tactical_priorities": self._set_priorities(intel_brief),
+            "risk_management": self._plan_risk_management(intel_brief),
+            "success_metrics": self._define_metrics(),
+            "contingency_plans": self._prepare_contingencies(intel_brief)
+        }
+        
+        self.current_strategy = direction
+        return direction
+        
+    def _determine_focus(self, intel: Dict[str, Any]) -> Dict[str, str]:
+        """Determine strategic focus areas"""
+        opportunities = intel.get("opportunities", [])
+        
+        # Prioritize highest asymmetry opportunities
+        focus = {
+            "primary": "AI skill development and workflow optimization",
+            "secondary": "Network building and relationship strengthening", 
+            "tertiary": "Income diversification and antifragile positioning"
+        }
+        
+        return focus
+        
+    def _optimize_resources(self, intel: Dict[str, Any]) -> Dict[str, Any]:
+        """Optimize resource allocation using game theory"""
+        return {
+            "time_allocation": {
+                "learning": "40%",
+                "building": "30%", 
+                "networking": "20%",
+                "maintenance": "10%"
+            },
+            "capital_allocation": {
+                "skill_development": "50%",
+                "tools_and_systems": "30%",
+                "networking_events": "20%"
+            },
+            "attention_allocation": {
+                "high_leverage_activities": "60%",
+                "relationship_building": "25%",
+                "intel_gathering": "15%"
+            }
+        }
+        
+    def _set_priorities(self, intel: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Set tactical priorities"""
+        return [
+            {
+                "priority": 1,
+                "action": "Master AI-human collaboration workflows",
+                "rationale": "Highest asymmetric upside potential",
+                "timeline": "90 days"
+            },
+            {
+                "priority": 2, 
+                "action": "Build direct audience relationships",
+                "rationale": "Hedge against platform fragility",
+                "timeline": "180 days"
+            },
+            {
+                "priority": 3,
+                "action": "Develop negotiation mastery",
+                "rationale": "Force multiplier for all dealings", 
+                "timeline": "120 days"
+            }
+        ]
+        
+    def _plan_risk_management(self, intel: Dict[str, Any]) -> Dict[str, Any]:
+        """Plan risk management strategies"""
+        threats = intel.get("threats", [])
+        
+        return {
+            "employment_risk": {
+                "hedge": "Multiple income streams",
+                "timeline": "6 months",
+                "trigger": "Automation acceleration"
+            },
+            "platform_risk": {
+                "hedge": "Direct audience relationships",
+                "timeline": "12 months", 
+                "trigger": "Regulatory changes"
+            },
+            "skill_obsolescence": {
+                "hedge": "Continuous learning system",
+                "timeline": "Ongoing",
+                "trigger": "Technology shifts"
+            }
+        }
+        
+    def _define_metrics(self) -> Dict[str, str]:
+        """Define success metrics"""
+        return {
+            "skill_development": "Demonstrable AI workflow proficiency",
+            "network_growth": "5 new high-value relationships/month",
+            "income_diversification": "3 separate income sources",
+            "optionality_preservation": "Multiple paths to 10x outcomes"
+        }
+        
+    def _prepare_contingencies(self, intel: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Prepare contingency plans"""
+        return [
+            {
+                "scenario": "AI advancement accelerates",
+                "response": "Double down on AI-human collaboration",
+                "trigger": "New model releases weekly"
+            },
+            {
+                "scenario": "Economic downturn",
+                "response": "Activate barbell strategy - extreme safety + high upside bets",
+                "trigger": "Market correction >20%"
+            }
+        ]
+        
+    def get_current_strategy(self) -> Dict[str, Any]:
+        """Get current strategic direction"""
+        return self.current_strategy

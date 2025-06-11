@@ -102,7 +102,7 @@ class DocumentManager:
     def _save_document(self, doc: LivingDocument):
         """Save document to appropriate location"""
         type_path = self.base_path / doc.doc_type
-        type_path.mkdir(exist_ok=True)
+        type_path.mkdir(parents=True, exist_ok=True)
         
         file_path = type_path / f"{doc.name.replace(' ', '_').lower()}.json"
         with open(file_path, 'w') as f:

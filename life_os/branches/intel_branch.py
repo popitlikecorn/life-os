@@ -211,3 +211,107 @@ class IntelBranch:
             "threats_monitored": len(self.threat_monitor),
             "last_sweep": "30 minutes ago" if self.intel_database else "Never"
         }
+"""
+Intel Branch - Intelligence gathering and analysis
+Part of the macro flywheel: Intel → Direction → Execution → Compound
+"""
+
+from typing import Dict, Any, List
+from datetime import datetime
+
+class IntelBranch:
+    """
+    Intelligence Branch - Gathers and processes environmental intelligence
+    Feeds the directional and executive branches
+    """
+    
+    def __init__(self):
+        self.role = "Intelligence Gathering & Analysis"
+        self.mission = "Provide actionable intelligence for strategic decision making"
+        self.intel_domains = [
+            "financial_markets",
+            "technology_trends", 
+            "geopolitical_developments",
+            "business_opportunities",
+            "social_dynamics",
+            "competitive_landscape"
+        ]
+        self.current_intel = {}
+        self.threat_level = "green"
+        
+    def daily_intel_briefing(self) -> Dict[str, Any]:
+        """Generate daily intelligence briefing"""
+        briefing = {
+            "date": datetime.now().date().isoformat(),
+            "threat_level": self.threat_level,
+            "key_developments": self._scan_developments(),
+            "opportunities": self._identify_opportunities(),
+            "threats": self._assess_threats(),
+            "asymmetric_bets": self._find_asymmetric_bets(),
+            "recommendations": self._generate_recommendations()
+        }
+        
+        self.current_intel = briefing
+        return briefing
+        
+    def _scan_developments(self) -> List[Dict[str, Any]]:
+        """Scan for key developments across domains"""
+        return [
+            {
+                "domain": "technology",
+                "development": "AI model capabilities expanding rapidly",
+                "impact": "high",
+                "timeframe": "immediate"
+            },
+            {
+                "domain": "geopolitics", 
+                "development": "Trade relationships shifting",
+                "impact": "medium",
+                "timeframe": "6-12 months"
+            }
+        ]
+        
+    def _identify_opportunities(self) -> List[Dict[str, Any]]:
+        """Identify emerging opportunities"""
+        return [
+            {
+                "type": "skill_arbitrage",
+                "description": "AI-human collaboration premium",
+                "asymmetry": "10:1 upside potential",
+                "action": "Develop AI workflow expertise"
+            }
+        ]
+        
+    def _assess_threats(self) -> List[Dict[str, Any]]:
+        """Assess potential threats and fragilities"""
+        return [
+            {
+                "threat": "Traditional employment automation",
+                "probability": "high",
+                "impact": "severe",
+                "hedge": "Multiple income streams"
+            }
+        ]
+        
+    def _find_asymmetric_bets(self) -> List[Dict[str, Any]]:
+        """Find Taleb-style asymmetric bets"""
+        return [
+            {
+                "bet": "Learn negotiation skills",
+                "downside": "100 hours time investment",
+                "upside": "10x deal-making improvement",
+                "edge": "Most people avoid difficult conversations"
+            }
+        ]
+        
+    def _generate_recommendations(self) -> List[str]:
+        """Generate actionable recommendations"""
+        return [
+            "Accelerate AI skill development",
+            "Build redundant income sources", 
+            "Strengthen network relationships"
+        ]
+        
+    def get_current_intel(self) -> Dict[str, Any]:
+        """Get current intelligence state"""
+        return self.current_intel
