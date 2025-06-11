@@ -1,0 +1,79 @@
+
+# Life OS Heuristics Configuration
+# Codified decision-making rules and mental models
+
+negotiation_heuristics:
+  name: "Negotiation Decision Rules"
+  principles:
+    - "Seek win-win outcomes - sustainability over short-term gains"
+    - "Understand the other party's true interests, not just positions"
+    - "Always have a strong BATNA before entering negotiations"
+    - "Create value before claiming value"
+    - "Use time as leverage - patience is power"
+    - "Information asymmetry is your friend - gather intel first"
+  tactical_rules:
+    - anchor_high: "When selling, start with ambitious but justified anchor"
+    - listen_more: "Talk 30%, listen 70% of the time"
+    - silence_power: "Use strategic silence after making offers"
+    - emotion_control: "Never negotiate when emotional or under pressure"
+    - walk_away_power: "Be prepared to walk away at any point"
+
+sales_heuristics:
+  name: "Sales and Persuasion Rules"
+  principles:
+    - "Solve problems, don't push products"
+    - "Build trust through competence and character"
+    - "Understand buying psychology and decision triggers"
+    - "Create urgency through scarcity and time sensitivity"
+    - "Social proof trumps logical arguments"
+  tactical_rules:
+    - qualification_first: "Qualify prospects before pitching"
+    - problem_agitation: "Agitate the problem before presenting solution"
+    - proof_stack: "Stack multiple forms of social proof"
+    - objection_reframe: "Reframe objections as clarification requests"
+    - assumptive_close: "Assume the sale throughout the process"
+
+investment_heuristics:
+  name: "Investment and Financial Decision Rules"
+  principles:
+    - "Asymmetric risk-reward is king - small downside, huge upside"
+    - "Diversification without understanding is diworsification"
+    - "Market timing is impossible, but market preparation is essential"
+    - "Contrarian thinking when everyone is euphoric or panicking"
+    - "Compound interest requires time and patience"
+  tactical_rules:
+    - position_sizing: "Risk only what you can afford to lose completely"
+    - conviction_weighting: "Size positions based on conviction level"
+    - antifragile_exposure: "Prefer assets that benefit from volatility"
+    - tail_hedging: "Always hedge against black swan events"
+    - reinvestment_discipline: "Reinvest gains systematically"
+
+social_heuristics:
+  name: "Social and Relationship Rules"
+  principles:
+    - "Reciprocity creates long-term obligations and goodwill"
+    - "Status games are zero-sum, value creation is positive-sum"
+    - "Network quality beats network quantity"
+    - "Give value before asking for value"
+    - "Reputation is your most valuable asset"
+  tactical_rules:
+    - value_first: "Lead with value in every interaction"
+    - strategic_giving: "Give gifts that cost you little but benefit others greatly"
+    - network_diversity: "Maintain weak ties across different domains"
+    - reputation_protection: "Never compromise long-term reputation for short-term gains"
+    - social_capital: "Invest in relationships during good times"
+
+learning_heuristics:
+  name: "Learning and Skill Development Rules"
+  principles:
+    - "Learn mental models, not just facts"
+    - "Practice > Theory for skill development"
+    - "Teach to learn - explain to understand"
+    - "Cross-domain learning creates unique insights"
+    - "Unlearning is as important as learning"
+  tactical_rules:
+    - deliberate_practice: "Focus on weaknesses, not strengths"
+    - spaced_repetition: "Review and reinforce key concepts regularly"
+    - application_focused: "Always ask 'How can I use this?'"
+    - feedback_loops: "Seek immediate feedback on performance"
+    - meta_learning: "Learn how to learn more effectively"
