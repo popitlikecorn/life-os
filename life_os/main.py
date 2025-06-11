@@ -22,6 +22,9 @@ from wings.social_wing import SocialWing
 from wings.political_wing import PoliticalWing
 from wings.psychological_wing import PsychologicalWing
 from wings.physiological_wing import PhysiologicalWing
+from wings.political_wing import PoliticalWing
+from wings.psychological_wing import PsychologicalWing
+from wings.physiological_wing import PhysiologicalWing
 
 class LifeOS:
     """

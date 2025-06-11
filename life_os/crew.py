@@ -4,7 +4,12 @@ Life OS Crew Management
 Handles the coordination of AI agents for life optimization
 """
 
-import yaml
+try:
+    import yaml
+except ImportError:
+    print("⚠️ PyYAML not installed. Please install with: pip install pyyaml")
+    yaml = None
+
 from pathlib import Path
 from tools.go_no_go_checker import GoNoGoChecker
 
@@ -111,6 +116,10 @@ class LifeOSCrew:
         
     def _load_config(self, filename):
         """Load configuration from YAML file"""
+        if yaml is None:
+            print(f"⚠️ Cannot load {filename} - PyYAML not available")
+            return {}
+            
         config_file = self.config_path / filename
         try:
             with open(config_file, 'r') as f:
