@@ -7,8 +7,8 @@ Frontier detection, asymmetric opportunity scouting, worldview updates
 import json
 from datetime import datetime
 from typing import Dict, List, Any
-from ..core.frontier_detector import FrontierDetector
-from ..core.living_document import LivingDocument
+from life_os.core.frontier_detector import FrontierDetector
+from life_os.core.living_document import LivingDocument
 
 class IntelBranch:
     """
