@@ -1,8 +1,8 @@
 [project]
-name = "python-template"
+name = "life-os"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = [{name = "harish", email = "popitlikepopcorn@gmail.com"}]
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.3.0",

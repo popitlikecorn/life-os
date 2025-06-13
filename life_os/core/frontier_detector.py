@@ -1,34 +1,49 @@
-
 """
 Frontier Detector - Monitors changes at the frontiers of technology, politics, business
 Part of the Intel Branch's environmental scanning capabilities
 """
-
 from typing import Dict, List, Any
 from datetime import datetime, timedelta
 import json
+import requests
+import os
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    raise ImportError(
+        "BeautifulSoup4 is required. Install it with `pip install beautifulsoup4`"
+    )
+
 
 class FrontierDetector:
-    """
-    Detects changes at the frontiers that could impact strategic positioning
-    Monitors: Technology, Politics, Business, Social Dynamics, Economics
-    """
-    
+
     def __init__(self):
         self.frontiers = {
-            "technology": TechnologyFrontier(),
-            "politics": PoliticalFrontier(), 
+            "tech": TechnologyFrontier(),
+            "politics": PoliticalFrontier(),
             "business": BusinessFrontier(),
             "social": SocialFrontier(),
             "economics": EconomicFrontier()
         }
         self.detection_history = []
-        self.significance_threshold = 0.7  # 0.0 to 1.0
-        
+        self.significance_threshold = float(
+            os.getenv("SIGNIFICANCE_THRESHOLD", 0.7))
+
+    def scan_frontiers(self,
+                       sources: List[str] = None) -> List[Dict[str, Any]]:
+        """Scan specified frontiers and return raw data"""
+        sources = sources or ["tech", "business"]
+        print(f"🔍 Frontier Detector: Scanning {sources}...")
+        report = self.daily_frontier_scan()
+        raw_data = []
+        for frontier_name in sources:
+            if frontier_name in report["frontier_updates"]:
+                raw_data.extend(report["frontier_updates"][frontier_name])
+        return raw_data
+
     def daily_frontier_scan(self) -> Dict[str, Any]:
-        """Conduct daily scan across all frontiers"""
+        """Scan all frontiers for updates"""
         print("🔍 Frontier Detector: Scanning all frontiers...")
-        
         frontier_report = {
             "scan_date": datetime.now().date().isoformat(),
             "timestamp": datetime.now().isoformat(),
@@ -37,179 +52,222 @@ class FrontierDetector:
             "asymmetric_implications": [],
             "strategic_recommendations": []
         }
-        
-        # Scan each frontier
         for frontier_name, frontier in self.frontiers.items():
-            updates = frontier.detect_changes()
-            frontier_report["frontier_updates"][frontier_name] = updates
-            
-            # Identify significant changes
-            significant = [update for update in updates if update.get("significance", 0) > self.significance_threshold]
-            frontier_report["significant_changes"].extend(significant)
-            
-        # Analyze for asymmetric implications
-        frontier_report["asymmetric_implications"] = self._analyze_asymmetric_implications(
-            frontier_report["significant_changes"]
-        )
-        
-        # Generate strategic recommendations
-        frontier_report["strategic_recommendations"] = self._generate_strategic_recommendations(
-            frontier_report["asymmetric_implications"]
-        )
-        
+            try:
+                updates = frontier.detect_changes()
+                frontier_report["frontier_updates"][frontier_name] = updates
+                significant = [
+                    update for update in updates if update.get(
+                        "significance", 0) > self.significance_threshold
+                ]
+                frontier_report["significant_changes"].extend(significant)
+            except Exception as e:
+                frontier_report["frontier_updates"][frontier_name] = [{
+                    "description":
+                    f"Scan failed: {str(e)}",
+                    "significance":
+                    0.0
+                }]
+        frontier_report[
+            "asymmetric_implications"] = self._analyze_asymmetric_implications(
+                frontier_report["significant_changes"])
+        frontier_report[
+            "strategic_recommendations"] = self._generate_strategic_recommendations(
+                frontier_report["asymmetric_implications"])
         self.detection_history.append(frontier_report)
-        
-        print(f"✅ Frontier scan complete. {len(frontier_report['significant_changes'])} significant changes detected.")
-        
+        print(
+            f"✅ Frontier scan complete. {len(frontier_report['significant_changes'])} significant changes detected."
+        )
         return frontier_report
-        
-    def _analyze_asymmetric_implications(self, significant_changes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Analyze changes for asymmetric opportunity/threat implications"""
+
+    def _analyze_asymmetric_implications(
+            self,
+            significant_changes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Analyze changes for asymmetric opportunities"""
         implications = []
-        
         for change in significant_changes:
-            if "AI" in change.get("description", "").upper():
+            desc = change.get("description", "").lower()
+            if "ai" in desc or "machine learning" in desc:
                 implications.append({
                     "type": "skill_arbitrage_opportunity",
-                    "description": "AI advancement creating skill premium for human-AI collaboration",
+                    "description": "AI advancement creating skill premium",
                     "asymmetry_ratio": "10:1",
                     "time_window": "6-18 months",
-                    "action_required": "Develop AI workflow expertise immediately"
+                    "action_required": "Develop AI expertise"
                 })
-                
-            if "REGULATION" in change.get("description", "").upper():
+            if "regulation" in desc or "policy" in desc:
                 implications.append({
-                    "type": "regulatory_arbitrage",
-                    "description": "Regulatory changes creating compliance gaps",
-                    "asymmetry_ratio": "3:1",
-                    "time_window": "12-24 months", 
-                    "action_required": "Position for regulatory compliance advantage"
+                    "type":
+                    "regulatory_arbitrage",
+                    "description":
+                    "Regulatory changes creating gaps",
+                    "asymmetry_ratio":
+                    "3:1",
+                    "time_window":
+                    "12-24 months",
+                    "action_required":
+                    "Position for compliance"
                 })
-                
         return implications
-        
-    def _generate_strategic_recommendations(self, implications: List[Dict[str, Any]]) -> List[str]:
-        """Generate strategic recommendations based on implications"""
+
+    def _generate_strategic_recommendations(
+            self, implications: List[Dict[str, Any]]) -> List[str]:
+        """Generate recommendations from implications"""
         recommendations = []
-        
         for implication in implications:
             if implication["type"] == "skill_arbitrage_opportunity":
-                recommendations.append("Immediately begin AI skill development program")
-                recommendations.append("Network with AI practitioners and early adopters")
-                
+                recommendations.extend([
+                    "Start AI skill development",
+                    "Connect with AI practitioners"
+                ])
             if implication["type"] == "regulatory_arbitrage":
-                recommendations.append("Research regulatory landscape in target domains")
-                recommendations.append("Build compliance capabilities before competitors")
-                
-        return list(set(recommendations))  # Remove duplicates
+                recommendations.extend([
+                    "Research regulatory changes",
+                    "Build compliance capabilities"
+                ])
+        return list(set(recommendations))
+
 
 class TechnologyFrontier:
-    """Monitor technology frontier changes"""
-    
+
     def detect_changes(self) -> List[Dict[str, Any]]:
-        """Detect technology frontier changes"""
-        # In real implementation, this would integrate with tech news APIs, research papers, etc.
-        return [
-            {
-                "area": "artificial_intelligence",
-                "description": "New multimodal AI models showing emergent capabilities",
-                "significance": 0.9,
-                "impact_timeline": "immediate",
-                "implications": ["Skill requirements changing rapidly", "New automation opportunities"]
-            },
-            {
-                "area": "blockchain",
-                "description": "Regulatory clarity improving in major markets",
-                "significance": 0.6,
+        """Detect changes in technology frontier"""
+        try:
+            url = os.getenv("FRONTIER_SOURCE", "https://news.ycombinator.com")
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            headlines = [
+                item.text for item in soup.find_all("a", class_="titlelink")
+            ]
+            return [{
+                "area": "technology",
+                "description": h,
+                "significance": 0.8,
                 "impact_timeline": "6-12 months",
-                "implications": ["Infrastructure investment opportunities", "Compliance arbitrage"]
-            }
-        ]
+                "implications": ["Tech trend shift"]
+            } for h in headlines[:2]]
+        except Exception as e:
+            return [{
+                "area": "technology",
+                "description": f"Scan failed: {str(e)}",
+                "significance": 0.0,
+                "impact_timeline": "N/A",
+                "implications": []
+            }]
+
 
 class PoliticalFrontier:
-    """Monitor political frontier changes"""
-    
+
     def detect_changes(self) -> List[Dict[str, Any]]:
-        """Detect political frontier changes"""
-        return [
-            {
-                "area": "trade_policy",
-                "description": "Supply chain reshoring accelerating",
-                "significance": 0.8,
-                "impact_timeline": "12-24 months",
-                "implications": ["Geographic arbitrage opportunities", "Supply chain disruptions"]
-            },
-            {
-                "area": "monetary_policy",
-                "description": "Central banks diverging on inflation approach",
+        """Detect changes in political frontier"""
+        try:
+            url = os.getenv("FRONTIER_SOURCE", "https://news.ycombinator.com")
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            headlines = [
+                item.text for item in soup.find_all("a", class_="titlelink")
+            ]
+            return [{
+                "area": "politics",
+                "description": h,
                 "significance": 0.7,
-                "impact_timeline": "6-18 months",
-                "implications": ["Currency volatility opportunities", "Interest rate arbitrage"]
-            }
-        ]
+                "impact_timeline": "12-24 months",
+                "implications": ["Policy shift"]
+            } for h in headlines[:2]]
+        except Exception as e:
+            return [{
+                "area": "politics",
+                "description": f"Scan failed: {str(e)}",
+                "significance": 0.0,
+                "impact_timeline": "N/A",
+                "implications": []
+            }]
+
 
 class BusinessFrontier:
-    """Monitor business frontier changes"""
-    
+
     def detect_changes(self) -> List[Dict[str, Any]]:
-        """Detect business frontier changes"""
-        return [
-            {
-                "area": "remote_work",
-                "description": "Permanent shift to hybrid/remote work models",
-                "significance": 0.8,
-                "impact_timeline": "permanent",
-                "implications": ["Geographic arbitrage enabled", "Commercial real estate disruption"]
-            },
-            {
-                "area": "creator_economy",
-                "description": "Direct monetization tools improving rapidly",
+        """Detect changes in business frontier"""
+        try:
+            url = os.getenv("FRONTIER_SOURCE", "https://news.ycombinator.com")
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            headlines = [
+                item.text for item in soup.find_all("a", class_="titlelink")
+            ]
+            return [{
+                "area": "business",
+                "description": h,
                 "significance": 0.7,
-                "impact_timeline": "immediate",
-                "implications": ["Audience-first business models", "Platform independence opportunities"]
-            }
-        ]
+                "impact_timeline": "6-18 months",
+                "implications": ["Market shift"]
+            } for h in headlines[:2]]
+        except Exception as e:
+            return [{
+                "area": "business",
+                "description": f"Scan failed: {str(e)}",
+                "significance": 0.0,
+                "impact_timeline": "N/A",
+                "implications": []
+            }]
+
 
 class SocialFrontier:
-    """Monitor social dynamics frontier changes"""
-    
-    def detect_changes(self) -> List[Dict[str, Any]]:
-        """Detect social frontier changes"""
-        return [
-            {
-                "area": "trust_dynamics",
-                "description": "Declining trust in traditional institutions",
-                "significance": 0.8,
-                "impact_timeline": "ongoing",
-                "implications": ["Alternative authority opportunities", "Direct relationship premium"]
-            },
-            {
-                "area": "community_formation",
-                "description": "Digital-first communities gaining economic power",
-                "significance": 0.6,
-                "impact_timeline": "accelerating",
-                "implications": ["Network effect opportunities", "Community-driven business models"]
-            }
-        ]
 
-class EconomicFrontier:
-    """Monitor economic frontier changes"""
-    
     def detect_changes(self) -> List[Dict[str, Any]]:
-        """Detect economic frontier changes"""
-        return [
-            {
-                "area": "inflation_dynamics",
-                "description": "Persistent inflation changing consumer behavior",
+        """Detect changes in social frontier"""
+        try:
+            url = os.getenv("FRONTIER_SOURCE", "https://news.ycombinator.com")
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            headlines = [
+                item.text for item in soup.find_all("a", class_="titlelink")
+            ]
+            return [{
+                "area": "social",
+                "description": h,
                 "significance": 0.7,
                 "impact_timeline": "ongoing",
-                "implications": ["Asset allocation shifts", "Pricing power opportunities"]
-            },
-            {
-                "area": "labor_markets",
-                "description": "Skills premium widening dramatically",
-                "significance": 0.9,
-                "impact_timeline": "accelerating",
-                "implications": ["Skill arbitrage opportunities", "Education disruption"]
-            }
-        ]
+                "implications": ["Social trend"]
+            } for h in headlines[:2]]
+        except Exception as e:
+            return [{
+                "area": "social",
+                "description": f"Scan failed: {str(e)}",
+                "significance": 0.0,
+                "impact_timeline": "N/A",
+                "implications": []
+            }]
+
+
+class EconomicFrontier:
+
+    def detect_changes(self) -> List[Dict[str, Any]]:
+        """Detect changes in economic frontier"""
+        try:
+            url = os.getenv("FRONTIER_SOURCE", "https://news.ycombinator.com")
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            headlines = [
+                item.text for item in soup.find_all("a", class_="titlelink")
+            ]
+            return [{
+                "area": "economics",
+                "description": h,
+                "significance": 0.7,
+                "impact_timeline": "6-18 months",
+                "implications": ["Economic shift"]
+            } for h in headlines[:2]]
+        except Exception as e:
+            return [{
+                "area": "economics",
+                "description": f"Scan failed: {str(e)}",
+                "significance": 0.0,
+                "impact_timeline": "N/A",
+                "implications": []
+            }]

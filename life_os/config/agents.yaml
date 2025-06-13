@@ -1,93 +1,17 @@
-
-# Life OS Agent Configuration
-# Defines the AI agents and their roles in the system
-
-planning_agent:
-  name: "Strategic Planner"
-  role: "Long-term planning and goal setting"
-  backstory: "Expert in strategic thinking and life optimization with deep understanding of goal hierarchies and resource allocation."
+---
+intel_scout:
   capabilities:
-    - strategic_planning
-    - goal_decomposition
-    - timeline_management
-    - priority_assessment
-  tools:
-    - calendar_integration
-    - goal_tracker
-    - resource_planner
-  personality:
-    - analytical
-    - forward_thinking
-    - systematic
-
-execution_agent:
-  name: "Action Coordinator"
-  role: "Task execution and progress monitoring"
-  backstory: "Specialized in turning plans into action with exceptional ability to break down complex tasks and monitor progress."
+    - technology
+    - business
+game_theorist:
   capabilities:
-    - task_breakdown
-    - progress_tracking
-    - deadline_management
-    - workflow_optimization
-  tools:
-    - task_manager
-    - progress_tracker
-    - notification_system
-  personality:
-    - results_oriented
-    - detail_focused
-    - persistent
-
-wellness_agent:
-  name: "Wellness Guardian"
-  role: "Health and wellbeing optimization"
-  backstory: "Dedicated to maintaining optimal physical and mental health through evidence-based recommendations and habit formation."
+    - strategy
+    - planning
+    - learning
+    - financial
+ops_planner:
   capabilities:
-    - health_monitoring
-    - habit_formation
-    - stress_management
-    - energy_optimization
-  tools:
-    - health_tracker
-    - habit_monitor
-    - meditation_guide
-  personality:
-    - nurturing
-    - health_conscious
-    - supportive
-
-learning_agent:
-  name: "Knowledge Curator"
-  role: "Continuous learning and skill development"
-  backstory: "Passionate about growth and development, specializing in personalized learning paths and knowledge retention strategies."
-  capabilities:
-    - skill_assessment
-    - learning_path_design
-    - knowledge_synthesis
-    - progress_evaluation
-  tools:
-    - learning_tracker
-    - knowledge_base
-    - skill_assessor
-  personality:
-    - curious
-    - patient
-    - encouraging
-
-financial_agent:
-  name: "Financial Advisor"
-  role: "Financial planning and resource management"
-  backstory: "Expert in personal finance with deep knowledge of budgeting, investing, and long-term financial planning."
-  capabilities:
-    - budget_management
-    - investment_planning
-    - expense_tracking
-    - financial_goal_setting
-  tools:
-    - budget_tracker
-    - investment_analyzer
-    - expense_monitor
-  personality:
-    - prudent
-    - analytical
-    - long_term_focused
+    - operations
+    - coordination
+    - wellness
+    - habit

@@ -1,14 +1,35 @@
-
-# Life OS Task Configuration
-# Defines the various tasks and workflows in the system
-
+---
+scan_frontier:
+  name: Scan Frontier
+  priority: high
+  description: Gather intelligence from tech and business frontiers
+  assigned_agent: intel_scout
+  frequency: daily
+  success_criteria:
+    completion: true
+plan_strategy:
+  name: Plan Strategy
+  priority: medium
+  description: Develop strategic plan based on intelligence
+  assigned_agent: game_theorist
+  frequency: weekly
+  success_criteria:
+    plan_quality_score: 4.0
+execute_ops:
+  name: Execute Operations
+  priority: high
+  description: Coordinate operational tasks
+  assigned_agent: ops_planner
+  frequency: continuous
+  success_criteria:
+    completion_rate: 85
 daily_planning:
-  name: "Daily Planning Session"
-  description: "Plan and prioritize tasks for the current day"
-  assigned_agent: "planning_agent"
-  frequency: "daily"
+  name: Daily Planning Session
+  description: Plan and prioritize tasks for the current day
+  assigned_agent: game_theorist
+  frequency: daily
   time: "08:00"
-  priority: "high"
+  priority: high
   inputs:
     - calendar_events
     - pending_tasks
@@ -19,17 +40,16 @@ daily_planning:
     - prioritized_task_list
     - time_blocks
   success_criteria:
-    - tasks_completed_percentage: 80
-    - schedule_adherence: 75
-    - satisfaction_score: 4.0
-
+    tasks_completed_percentage: 80
+    schedule_adherence: 75
+    satisfaction_score: 4.0
 weekly_review:
-  name: "Weekly Progress Review"
-  description: "Analyze progress and adjust plans for the upcoming week"
-  assigned_agent: "planning_agent"
-  frequency: "weekly"
+  name: Weekly Progress Review
+  description: Analyze progress and adjust plans for the upcoming week
+  assigned_agent: game_theorist
+  frequency: weekly
   time: "sunday_18:00"
-  priority: "high"
+  priority: high
   inputs:
     - week_completion_data
     - goal_progress_metrics
@@ -40,15 +60,14 @@ weekly_review:
     - next_week_plan
     - goal_adjustments
   success_criteria:
-    - review_completion: true
-    - plan_quality_score: 4.0
-
+    review_completion: true
+    plan_quality_score: 4.0
 habit_tracking:
-  name: "Habit Monitoring and Reinforcement"
-  description: "Track habits and provide reinforcement for consistency"
-  assigned_agent: "wellness_agent"
-  frequency: "continuous"
-  priority: "medium"
+  name: Habit Monitoring and Reinforcement
+  description: Track habits and provide reinforcement for consistency
+  assigned_agent: ops_planner
+  frequency: continuous
+  priority: medium
   inputs:
     - habit_check_ins
     - behavior_patterns
@@ -58,16 +77,15 @@ habit_tracking:
     - reinforcement_messages
     - adjustment_recommendations
   success_criteria:
-    - consistency_rate: 85
-    - habit_strength_improvement: true
-
+    consistency_rate: 85
+    habit_strength_improvement: true
 learning_session:
-  name: "Skill Development Session"
-  description: "Facilitate focused learning and skill building"
-  assigned_agent: "learning_agent"
-  frequency: "daily"
+  name: Skill Development Session
+  description: Facilitate focused learning and skill building
+  assigned_agent: game_theorist
+  frequency: daily
   duration: "60_minutes"
-  priority: "medium"
+  priority: medium
   inputs:
     - learning_goals
     - current_skill_level
@@ -78,16 +96,15 @@ learning_session:
     - progress_assessment
     - next_steps
   success_criteria:
-    - session_completion: true
-    - comprehension_score: 75
-    - engagement_level: 4.0
-
+    session_completion: true
+    comprehension_score: 75
+    engagement_level: 4.0
 financial_check:
-  name: "Financial Health Assessment"
-  description: "Monitor financial metrics and provide recommendations"
-  assigned_agent: "financial_agent"
-  frequency: "weekly"
-  priority: "medium"
+  name: Financial Health Assessment
+  description: Monitor financial metrics and provide recommendations
+  assigned_agent: game_theorist
+  frequency: weekly
+  priority: medium
   inputs:
     - account_balances
     - recent_transactions
@@ -98,16 +115,15 @@ financial_check:
     - budget_variance_report
     - recommendations
   success_criteria:
-    - budget_adherence: 90
-    - savings_rate_target: true
-    - financial_goal_progress: true
-
+    budget_adherence: 90
+    savings_rate_target: true
+    financial_goal_progress: true
 task_execution:
-  name: "Task Execution and Monitoring"
-  description: "Execute planned tasks and monitor progress"
-  assigned_agent: "execution_agent"
-  frequency: "continuous"
-  priority: "high"
+  name: Task Execution and Monitoring
+  description: Execute planned tasks and monitor progress
+  assigned_agent: ops_planner
+  frequency: continuous
+  priority: high
   inputs:
     - task_queue
     - current_context
@@ -118,16 +134,15 @@ task_execution:
     - progress_updates
     - blocking_issues
   success_criteria:
-    - completion_rate: 85
-    - quality_score: 4.0
-    - time_efficiency: 90
-
+    completion_rate: 85
+    quality_score: 4.0
+    time_efficiency: 90
 wellness_check:
-  name: "Wellness and Energy Assessment"
-  description: "Monitor physical and mental wellbeing indicators"
-  assigned_agent: "wellness_agent"
+  name: Wellness and Energy Assessment
+  description: Monitor physical and mental wellbeing indicators
+  assigned_agent: ops_planner
   frequency: "3x_daily"
-  priority: "high"
+  priority: high
   inputs:
     - energy_levels
     - mood_indicators
@@ -138,6 +153,6 @@ wellness_check:
     - energy_recommendations
     - recovery_suggestions
   success_criteria:
-    - wellness_trend: "improving"
-    - energy_optimization: true
-    - stress_management: "effective"
+    wellness_trend: "improving"
+    energy_optimization: true
+    stress_management: "effective"
