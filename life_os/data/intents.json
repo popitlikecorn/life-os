@@ -1,0 +1,5 @@
+{
+    "greet": ["whats up", "yo", "hello"],
+    "crew": ["crew", "show crew"],
+    "exit": ["exit", "quit"]
+}
