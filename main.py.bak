@@ -1,0 +1,206 @@
+#!/usr/bin/env python3
+"""
+Life OS - Single Chat Interface for Life Optimization
+Antifragile system based on Taleb's principles: Asymmetry, Convexity, Via Negativa
+"""
+import logging
+import sys
+from pathlib import Path
+from typing import Dict, Any
+import yaml
+import requests
+import spacy
+
+sys.path.append(str(Path(__file__).parent / "life_os"))
+
+from life_os.branches.intel_branch import IntelBranch
+from life_os.branches.directional_branch import DirectionalBranch
+from life_os.branches.executive_branch import ExecutiveBranch
+from life_os.core.document_manager import DocumentManager
+from life_os.crew import LifeOSCrew
+
+logging.basicConfig(filename='life_os/logs/execution.log',
+                    level=logging.INFO,
+                    format='%(asctime)s - %(message)s')
+
+
+class LifeOS:
+
+    def __init__(self):
+        self.nlp = spacy.load("life_os/models/intent_classifier")
+        logging.info("Initializing Life OS")
+        print("🚀 Initializing Life OS - Antifragile Intelligence")
+        try:
+            self.doc_manager = DocumentManager()
+            self.crew = LifeOSCrew(self.doc_manager)
+        except Exception as e:
+            logging.error(f"Initialization failed: {e}")
+            raise RuntimeError(f"Fragility in initialization: {e}")
+        self.intel = IntelBranch(self.doc_manager)
+        self.directional = DirectionalBranch(self.doc_manager)
+        self.executive = ExecutiveBranch(self.doc_manager)
+        self.context = {
+            "completed_protocols": [],
+            "requires_frontier_intel":
+            True,
+            "requires_worldview_alignment":
+            True,
+            "requires_asymmetric_upside":
+            True,
+            "available_resources": [
+                "task_queue", "calendar_events", "energy_levels",
+                "goals_progress", "week_completion_data",
+                "goal_progress_metrics", "habit_tracking_data",
+                "energy_patterns", "habit_check_ins", "behavior_patterns",
+                "environmental_factors", "learning_goals",
+                "current_skill_level", "available_time",
+                "learning_preferences", "account_balances",
+                "recent_transactions", "budget_categories", "financial_goals",
+                "current_context", "mood_indicators", "physical_metrics",
+                "stress_levels"
+            ],
+            "planning_complete":
+            True
+        }
+        self._initialize_documents()
+        self.crew.initialize_agents()
+        print("✅ System ready. Hunting optionality.")
+
+    def _initialize_documents(self):
+        """Initialize worldview and planning protocol"""
+        try:
+            with open("life_os/config/agents.yaml", "r") as f:
+                agent_configs = yaml.safe_load(f) or {}
+                logging.info(f"Loaded agents.yaml: {agent_configs}")
+        except Exception as e:
+            logging.error(f"Error loading agents.yaml: {e}")
+            agent_configs = {
+                "intel_scout": {
+                    "capabilities": ["technology", "business"]
+                },
+                "game_theorist": {
+                    "capabilities":
+                    ["strategy", "planning", "learning", "financial"]
+                },
+                "ops_planner": {
+                    "capabilities":
+                    ["operations", "coordination", "wellness", "habit"]
+                }
+            }
+
+        worldview_content = f"""
+# Worldview Framework
+Virtues: Honor, Glory, Bravery
+Interests: {', '.join(agent_configs.get('intel_scout', {}).get('capabilities', ['technology', 'business']))}
+"""
+        try:
+            self.doc_manager.create_document("Worldview Framework",
+                                             "worldview",
+                                             content=worldview_content)
+        except Exception as e:
+            logging.error(f"Worldview creation failed: {e}")
+            raise RuntimeError(f"Fragility in document creation: {e}")
+
+        planning_steps = [
+            "Review frontier intelligence", "Align with worldview",
+            "Assess asymmetric opportunities", "Map resources and constraints",
+            "Analyze dependencies", "Design antifragile plan",
+            "Verify optionality", "Go/no-go decision"
+        ]
+        planning_criteria = {
+            "requires_frontier_intel": True,
+            "requires_worldview_alignment": True,
+            "requires_asymmetric_upside": True
+        }
+        try:
+            self.doc_manager.create_document("Enhanced Planning Protocol",
+                                             "protocol",
+                                             steps=planning_steps,
+                                             criteria=planning_criteria)
+        except Exception as e:
+            logging.error(f"Planning protocol creation failed: {e}")
+            raise RuntimeError(f"Fragility in protocol creation: {e}")
+
+    def handle_query(self, query: str) -> str:
+        """Parse and route query to branches or crew"""
+        query = query.lower().strip()
+        logging.info(f"Query: {query}")
+
+        try:
+            if "affairs" in query or "interests" in query:
+                worldview = self.intel.get_worldview()
+                frontier = self.intel.scout_frontier()
+                return (
+                    f"Affairs/Interests: {worldview.get('virtues', 'None')}. "
+                    f"X Front: {frontier.get('x_interests', 'None')}")
+            elif "targets" in query:
+                status = self.directional.get_status()
+                targets = status.get('strategic_targets', [])
+                return f"Targets: {', '.join(t.get('action', '') for t in targets) if targets else 'None set'}"
+            elif "briefing" in query or "daily" in query:
+                frontier = self.intel.scout_frontier()
+                targets = self.directional.get_status().get(
+                    'strategic_targets', [])
+                schedule = self.executive.get_status()
+                return (
+                    f"Daily Briefing:\n- Frontier: {frontier.get('opportunities', 'None')}\n"
+                    f"- Targets: {', '.join(t.get('action', '') for t in targets) if targets else 'None'}\n"
+                    f"- Schedule: {schedule.get('active_tasks', 0)} tasks active"
+                )
+            elif "eod" in query or "operation" in query:
+                status = self.executive.get_status()
+                tasks = status.get('active_tasks', 0)
+                last_exec = status.get('last_execution', 'Never')
+                return f"EOD Targets: {tasks} tasks active, Last Execution: {last_exec}"
+            elif query.startswith("protocol "):
+                protocol_name = query[9:].strip()
+                return self.executive.run_protocol(protocol_name, self.context)
+            elif query == "worldview":
+                return str(self.intel.get_worldview())
+            elif query == "frontier":
+                return str(self.intel.scout_frontier())
+            elif query == "status":
+                return (f"Intel: {self.intel.get_status()}\n"
+                        f"Directional: {self.directional.get_status()}\n"
+                        f"Executive: {self.executive.get_status()}")
+            elif query == "docs":
+                return "\n".join(f"- {doc}"
+                                 for doc in self.doc_manager.list_documents())
+            elif query == "crew":
+                result = self.crew.run(self.context)
+                return f"Crew operations completed: {result}"
+            else:
+                return "Unknown query. Subtract noise. Try again."
+        except Exception as e:
+            logging.error(f"Query error: {e}")
+            return f"Fragility detected: {str(e)}. Invert. Always invert."
+
+    def interactive_mode(self):
+        """Single chat interface"""
+        print(
+            "🧠 Enter any query (e.g., 'What are my affairs?', 'Daily briefing', 'exit')"
+        )
+        print("life_os> ", end="")
+        while True:
+            try:
+                query = input().strip()
+                if query.lower() == "exit":
+                    break
+                response = self.handle_query(query)
+                print(response)
+                print("\nlife_os> ", end="")
+            except Exception as e:
+                logging.error(f"Interactive mode error: {e}")
+                print(f"Fragility detected: {str(e)}. Invert. Always invert.")
+        self.doc_manager.close()
+        logging.info("System shutdown")
+        print("System shutdown. Stay antifragile.")
+
+
+def main():
+    life_os = LifeOS()
+    life_os.interactive_mode()
+
+
+if __name__ == "__main__":
+    main()

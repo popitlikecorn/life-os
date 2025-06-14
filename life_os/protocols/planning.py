@@ -13,18 +13,18 @@ class EnhancedPlanningProtocol:
         self.doc_manager = doc_manager
         self.protocol = doc_manager.get_document("Enhanced Planning Protocol")
 
+    # life_os/protocols/planning.py (partial, update execute)
     def execute(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Execute the planning protocol"""
         if not self.protocol:
             return {"status": "error", "message": "Protocol not found"}
-
         result = {"steps_completed": [], "status": "success"}
-        for step in self.protocol.steps:
+        steps = getattr(self.protocol, "steps", [])  # Safe access
+        for step in steps:
             if not self._execute_step(step, context):
                 result["status"] = "blocked"
                 break
             result["steps_completed"].append(step)
-
         self.protocol.log_execution(result["status"] == "success", context)
         self.doc_manager.create_document("Planning Result",
                                          "targets",

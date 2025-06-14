@@ -1,21 +1,12 @@
 {
   "name": "Worldview Framework",
   "doc_type": "worldview",
-  "content": "\n# Worldview Framework\nVirtues: Honor, Glory, Bravery\nInterests: technology, business\n\n\n## Evolution Update (v2)\n**Date**: 2025-06-14\n**Insight**: {'timestamp': '2025-06-14T04:34:00.750752', 'opportunities': [], 'fragilities': [], 'priority_alerts': [], 'x_interests': []}\n",
+  "content": "\n# Worldview Framework\nVirtues: Honor, Glory, Bravery\nInterests: technology, business\n",
   "metadata": {},
-  "version": 2,
-  "created_at": "2025-06-14T04:33:38.551327",
-  "last_updated": "2025-06-14T04:34:01.024244",
-  "evolution_history": [
-    {
-      "timestamp": "2025-06-14T04:34:01.024203",
-      "insight": "{'timestamp': '2025-06-14T04:34:00.750752', 'opportunities': [], 'fragilities': [], 'priority_alerts': [], 'x_interests': []}",
-      "source": "frontier_scan",
-      "reasoning": "",
-      "version_before": 1,
-      "version_after": 2
-    }
-  ],
+  "version": 1,
+  "created_at": "2025-06-14T04:38:34.229077",
+  "last_updated": "2025-06-14T04:38:34.229084",
+  "evolution_history": [],
   "tags": [],
   "cross_references": [],
   "effectiveness_score": 0.0,
